@@ -55,7 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreateAndEditMenu.xaml.cs">
+      <DependentUpon>CreateAndEditMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SQLSimplifier.cs" />
+    <Page Include="CreateAndEditMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,7 +111,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\login_btn.png" />
     <Resource Include="images\momentum_bg.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

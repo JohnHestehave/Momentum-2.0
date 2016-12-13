@@ -33,7 +33,7 @@
 		</Grid.Background>
 		<Label x:Name="mainmenulabel" Content="Logget ind som: [username]" HorizontalAlignment="Right" VerticalAlignment="Top" Width="390" Foreground="White" Height="40" FontSize="20" Padding="5" Margin="0" HorizontalContentAlignment="Right"/>
 		<Button x:Name="LogoutButton" Template="{StaticResource RoundedButtonTemplate}" Content="Log ud" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="20" Click="Logout" Background="#FF1E64DC" Cursor="Hand" Margin="2,2,0,0"/>
-		<DataGrid x:Name="dataGrid" Margin="0,45,0,95" AutoGenerateColumns="False" CanUserDeleteRows="False" IsReadOnly="True" MinWidth="782" MinHeight="50" SelectionChanged="dataGrid_SelectionChanged">
+		<DataGrid x:Name="dataGrid" Margin="0,45,0,95" AutoGenerateColumns="False" CanUserDeleteRows="False" IsReadOnly="True" MinWidth="782" MinHeight="50" SelectionChanged="dataGrid_SelectionChanged" VerticalScrollBarVisibility="Disabled" CanUserResizeRows="False" RowHeaderWidth="0">
 			<DataGrid.Background>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 					<GradientStop Color="#FF777777" Offset="0"/>
@@ -41,20 +41,26 @@
 				</LinearGradientBrush>
 			</DataGrid.Background>
 			<DataGrid.Columns>
-				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Kunde Nr." Width="70" Binding="{Binding ID}"/>
-				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Fornavn" Width="100" Binding="{Binding Fornavn}"/>
-				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Efternavn" Width="100" Binding="{Binding Efternavn}"/>
-				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Fødselsdato" Width="80" Binding="{Binding Foedselsdato}"/>
-				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="E-mail" Width="150" Binding="{Binding Email}"/>
-				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Tlf. Nr." Width="100" Binding="{Binding Tlf}"/>
+				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Kunde Nr." Binding="{Binding ID}"/>
+				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Fornavn" Width="Auto" Binding="{Binding Fornavn}"/>
+				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Efternavn" Width="Auto" Binding="{Binding Efternavn}"/>
+				<DataGridTextColumn Binding="{Binding Email}" ClipboardContentBinding="{x:Null}" Header="E-Mail"/>
+				<DataGridTextColumn Binding="{Binding Adresse}" ClipboardContentBinding="{x:Null}" Header="Adresse"/>
+				<DataGridTextColumn Binding="{Binding Postnr}" ClipboardContentBinding="{x:Null}" Header="Post nr."/>
+				<DataGridTextColumn Binding="{Binding City}" ClipboardContentBinding="{x:Null}" Header="By"/>
+				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Tlf. Nr." Width="Auto" Binding="{Binding Tlf}"/>
+				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Indløst dato" Width="Auto" Binding="{Binding IndloestDato}"/>
+				<DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Udløbsdato" Width="Auto" Binding="{Binding UdloebsDato}"/>
+				<DataGridTextColumn Binding="{Binding AarskortType}" ClipboardContentBinding="{x:Null}" Header="Årskort type"/>
+				<DataGridTextColumn Binding="{Binding Andet}" ClipboardContentBinding="{x:Null}" Header="Kommentar"/>
 			</DataGrid.Columns>
 		</DataGrid>
 		<Button x:Name="Create" Template="{StaticResource RoundedButtonTemplate}" Background="#FF1E64DC" Foreground="White" Content="Opret" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="120" Height="50" Click="CreatePerson" Cursor="Hand"/>
 		<Button x:Name="Edit" Template="{StaticResource RoundedButtonTemplate}" Background="#FF1E64DC" Foreground="White" Content="Rediger" HorizontalAlignment="Left" Margin="135,0,0,10" VerticalAlignment="Bottom" Width="120" Height="50" IsEnabled="False" Click="EditPerson" Cursor="Hand"/>
 		<Button x:Name="Delete" Template="{StaticResource RoundedButtonTemplate}" Background="#FF1E64DC" Foreground="White" Content="Slet" HorizontalAlignment="Left" Margin="260,0,0,10" VerticalAlignment="Bottom" Width="120" Height="50" IsEnabled="False" Click="DeletePerson" Cursor="Hand"/>
 		<Button x:Name="UpdateGrid" Template="{StaticResource RoundedButtonTemplate}" Background="#FF1E64DC" Foreground="White" Content="Opdater" HorizontalAlignment="Left" Margin="2,0,0,70" Width="75" Click="UpdateDataGrid" Cursor="Hand" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Height="23"/>
-		<TextBox x:Name="soegBox" HorizontalAlignment="Right" Height="23" Margin="0,0,84,70" TextWrapping="Wrap" Text="Søg efter navn/tlf/email" VerticalAlignment="Bottom" Width="259" VerticalContentAlignment="Center" GotFocus="Soeg_Focus"/>
-		<Button x:Name="button" Content="Søg" HorizontalAlignment="Right" Margin="0,0,2,70" VerticalAlignment="Bottom" Width="80" Height="23" Click="Soeg" Cursor="Hand"/>
+		<TextBox x:Name="soegBox" HorizontalAlignment="Right" Height="23" Margin="0,0,84,70" TextWrapping="Wrap" Text="Søg efter navn/tlf/email" VerticalAlignment="Bottom" Width="259" VerticalContentAlignment="Center" GotFocus="Soeg_Focus" LostFocus="Soeg_Unfocus"/>
+		<Button x:Name="button" Template="{StaticResource RoundedButtonTemplate}" Background="#FF1E64DC" Foreground="White" Content="Søg" HorizontalAlignment="Right" Margin="0,0,2,70" VerticalAlignment="Bottom" Width="80" Height="23" Click="Soeg" Cursor="Hand"/>
 		<Label x:Name="label" Content="999+ Resultater fundet" HorizontalAlignment="Right" Margin="0,296,348,70" VerticalAlignment="Bottom" Height="22" Width="354" HorizontalContentAlignment="Right" Foreground="White" VerticalContentAlignment="Center" Padding="5,3"/>
 
 	</Grid>

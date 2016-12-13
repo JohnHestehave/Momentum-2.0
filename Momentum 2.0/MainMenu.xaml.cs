@@ -44,6 +44,14 @@ namespace Momentum_2._0
 			}
 		}
 
+		public void Soeg_Unfocus(object sender, RoutedEventArgs e)
+		{
+			if (soegBox.Text == "")
+			{
+				soegBox.Text = "Søg efter navn/tlf/email";
+			}
+		}
+
 		void Soeg(object sender, RoutedEventArgs e)
 		{
 			string soeg = soegBox.Text;
@@ -91,11 +99,16 @@ namespace Momentum_2._0
 
 		void CreatePerson(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Opret");
+			//MessageBox.Show("Opret");
+			CreateAndEditMenu page = new CreateAndEditMenu();
+			page.Title = "Opret";
+			page.Show();
 		}
 		void EditPerson(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Rediger");
+			CreateAndEditMenu page = new CreateAndEditMenu();
+			page.Title = "Rediger";
+			page.Show();
 		}
 		void DeletePerson(object sender, RoutedEventArgs e)
 		{
@@ -114,10 +127,10 @@ namespace Momentum_2._0
 			
 
 
-			dataGrid.Items.Add(new Item() { ID = "1", Fornavn = "Lars", Efternavn = "Larsen", Foedselsdato = "01-05-1990", Email = "LarsLarsen@LL.dk", Tlf = "12457889" });
-			dataGrid.Items.Add(new Item() { ID = "2", Fornavn = "Hans", Efternavn = "Hansen", Foedselsdato = "04-11-1985", Email = "HansHansen@HH.dk", Tlf = "45986578" });
-			dataGrid.Items.Add(new Item() { ID = "3", Fornavn = "Simon", Efternavn = "Simonsen", Foedselsdato = "06-06-1960", Email = "SimonSimonsen@SS.dk", Tlf = "12548723" });
-			dataGrid.Items.Add(new Item() { ID = "4", Fornavn = "Ole", Efternavn = "Olsen", Foedselsdato = "15-10-1940", Email = "OleOlsen@OO.dk", Tlf = "56874457" });
+			dataGrid.Items.Add(new Item() { ID = "1", Fornavn = "Lars", Efternavn = "Larsen", Email = "LarsLarsen@LL.dk", Tlf = "12457889" });
+			dataGrid.Items.Add(new Item() { ID = "2", Fornavn = "Hans", Efternavn = "Hansen", Email = "HansHansen@HH.dk", Tlf = "45986578" });
+			dataGrid.Items.Add(new Item() { ID = "3", Fornavn = "Simon", Efternavn = "Simonsen", Email = "SimonSimonsen@SS.dk", Tlf = "12548723" });
+			dataGrid.Items.Add(new Item() { ID = "4", Fornavn = "Ole", Efternavn = "Olsen", Email = "OleOlsen@OO.dk", Tlf = "56874457" });
 
 		}
 
