@@ -41,6 +41,11 @@ namespace Momentum_2._0
 			}
 		}
 
+		public SqlConnection GetConnection()
+		{
+			return sql;
+		}
+
 		public void Dispose()
 		{
 			sql.Dispose();

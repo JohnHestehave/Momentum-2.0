@@ -32,12 +32,12 @@
 			<ImageBrush ImageSource="/images/momentum_bg.png" Stretch="UniformToFill"/>
 		</Grid.Background>
 		<Rectangle Fill="Black" Margin="0" Height="300" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Opacity="0.85" />
-		<Label x:Name="label" Content="MOMENTUM" Height="40" Width="180" Margin="0,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Center"/>
+		<Label x:Name="label" Content="MOMENTUM" Height="56" Width="300" Margin="0,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="30" Foreground="White" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
 		<TextBox x:Name="textBox" Height="40" Margin="0,132,0,0" VerticalAlignment="Top" Width="250" FontSize="20" VerticalContentAlignment="Center" MaxLines="1" MaxLength="20" TabIndex="1" HorizontalAlignment="Center"/>
 		<PasswordBox x:Name="passwordBox" Margin="0,203,0,0" VerticalAlignment="Top" Height="40" Width="250" VerticalContentAlignment="Center" FontSize="20" TabIndex="2" HorizontalAlignment="Center"/>
-		<Button x:Name="button" Template="{StaticResource RoundedButtonTemplate}" Content="Login" HorizontalAlignment="Center" Margin="0,287,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="20" IsDefault="True" Click="SubmitLogin" IsTabStop="False" Background="#FF1E64DC" Foreground="White" BorderBrush="Black" Cursor="Hand"/>
-		<Label x:Name="label_Copy" Content="Brugernavn" Height="25" Width="127" Margin="272,107,395,0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
-		<Label x:Name="label_Copy1" Content="Kodeord" Height="25" Width="127" Margin="272,178,395,0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+		<Button x:Name="button" Template="{StaticResource RoundedButtonTemplate}" Content="Login" HorizontalAlignment="Center" Margin="0,287,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="20" IsDefault="True" Click="SubmitLogin" IsTabStop="False" Background="#FF1E64DC" Foreground="White" BorderBrush="Black" Cursor="Hand" FontFamily="Century Gothic"/>
+		<Label x:Name="label_Copy" Content="Brugernavn" Height="25" Width="127" Margin="272,107,395,0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
+		<Label x:Name="label_Copy1" Content="Kodeord" Height="25" Width="127" Margin="272,178,395,0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
 	</Grid>
-	
+
 </Window>
