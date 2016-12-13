@@ -1,0 +1,43 @@
+﻿<Window x:Name="MainWindow1" x:Class="Momentum_2._0.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Momentum_2._0"
+        mc:Ignorable="d"
+        Title="Momentum" Height="420" Width="800" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+	<Window.Resources>
+		<ControlTemplate x:Key="RoundedButtonTemplate" TargetType="{x:Type Button}">
+			<Border x:Name="border" 
+                    CornerRadius="5" 
+                    BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+				<ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+			</Border>
+			<ControlTemplate.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Background" TargetName="border" Value="#2178F0"/>
+				</Trigger>
+				<Trigger Property="IsPressed" Value="True">
+					<Setter Property="Background" TargetName="border" Value="#213CDC"/>
+				</Trigger>
+				<Trigger Property="IsEnabled" Value="False">
+					<Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+					<Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#FF838383"/>
+				</Trigger>
+			</ControlTemplate.Triggers>
+		</ControlTemplate>
+	</Window.Resources>
+	<Grid>
+		<Grid.Background>
+			<ImageBrush ImageSource="/images/momentum_bg.png" Stretch="UniformToFill"/>
+		</Grid.Background>
+		<Rectangle Fill="Black" Margin="0" Height="300" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Opacity="0.85" />
+		<Label x:Name="label" Content="MOMENTUM" Height="40" Width="180" Margin="0,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Center"/>
+		<TextBox x:Name="textBox" Height="40" Margin="0,132,0,0" VerticalAlignment="Top" Width="250" FontSize="20" VerticalContentAlignment="Center" MaxLines="1" MaxLength="20" TabIndex="1" HorizontalAlignment="Center"/>
+		<PasswordBox x:Name="passwordBox" Margin="0,203,0,0" VerticalAlignment="Top" Height="40" Width="250" VerticalContentAlignment="Center" FontSize="20" TabIndex="2" HorizontalAlignment="Center"/>
+		<Button x:Name="button" Template="{StaticResource RoundedButtonTemplate}" Content="Login" HorizontalAlignment="Center" Margin="0,287,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="20" IsDefault="True" Click="SubmitLogin" IsTabStop="False" Background="#FF1E64DC" Foreground="White" BorderBrush="Black" Cursor="Hand"/>
+		<Label x:Name="label_Copy" Content="Brugernavn" Height="25" Width="127" Margin="272,107,395,0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+		<Label x:Name="label_Copy1" Content="Kodeord" Height="25" Width="127" Margin="272,178,395,0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center"/>
+	</Grid>
+	
+</Window>
