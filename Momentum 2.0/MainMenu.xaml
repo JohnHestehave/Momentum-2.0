@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Momentum_2._0"
         mc:Ignorable="d"
         Title="MainMenu" Height="600" Width="1200" WindowStartupLocation="CenterScreen" MinHeight="600" MinWidth="1200" Background="White">
+	
 	<Window.Resources>
 		<ControlTemplate x:Key="RoundedButtonTemplate" TargetType="{x:Type Button}">
 			<Border x:Name="border" 

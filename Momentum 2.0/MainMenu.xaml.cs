@@ -217,7 +217,6 @@ namespace Momentum_2._0
 		public int ID { get; set; }
 		public string Fornavn { get; set; }
 		public string Efternavn { get; set; }
-
 		public string Adresse { get; set; }
 		public string Postnr { get; set; }
 		public string City { get; set; }
