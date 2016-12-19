@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Momentum_2._0
 {
@@ -19,9 +21,11 @@ namespace Momentum_2._0
 	/// </summary>
 	public partial class MainMenu : Window
 	{
+		string search;
 		public MainMenu()
 		{
 			InitializeComponent();
+			search = "";
 		}
 
 		public void Username(string username)
@@ -54,36 +58,8 @@ namespace Momentum_2._0
 
 		void Soeg(object sender, RoutedEventArgs e)
 		{
-			string soeg = soegBox.Text;
-			if(soeg != "")
-			{
-				List<char> nums = new List<char>() {'1', '2', '3','4','5','6','7','8','9','0'};
-				SQLSimplifier sql = new SQLSimplifier();
-				sql.Connect("ealdb1.eal.local", "EJL34_DB", "ejl34_usr", "Baz1nga34");
-				if (soeg.Contains('@')) // E-mail
-				{
-					Dictionary<string, string> data = new Dictionary<string, string>();
-					data = sql.Select("*", "AarskortMomentum", "WHERE Email LIKE '%email%'");
-					UpdateData(data);
-				}
-				else if (nums.Any(s=>soeg.Contains(s))) // Tlf nr.
-				{
-					Dictionary<string, string> data = new Dictionary<string, string>();
-					data = sql.Select("*", "AarskortMomentum", "WHERE Tlf LIKE '%tlf%'");
-					UpdateData(data);
-				}
-				else // Navn
-				{
-					Dictionary<string, string> data = new Dictionary<string, string>();
-					data = sql.Select("*", "AarskortMomentum", "WHERE Fornavn LIKE '%fornavn%' OR Efternavn LIKE '%efternavn%'");
-					UpdateData(data);
-				}
-			}
-		}
-
-		void UpdateData(Dictionary<string, string> data)
-		{
-
+			search = soegBox.Text;
+			UpdateDataGrid(null, null);
 		}
 
 		void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -101,47 +77,160 @@ namespace Momentum_2._0
 		{
 			//MessageBox.Show("Opret");
 			CreateAndEditMenu page = new CreateAndEditMenu();
-			page.Title = "Opret";
 			page.Show();
 		}
 		void EditPerson(object sender, RoutedEventArgs e)
 		{
-			CreateAndEditMenu page = new CreateAndEditMenu();
-			page.Title = "Rediger";
-			page.Show();
+			Item item = (Item)dataGrid.SelectedItem;
+			if(item != null)
+			{
+				CreateAndEditMenu page = new CreateAndEditMenu(item);
+				page.Show();
+			}
 		}
 		void DeletePerson(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Slet");
+			Item item = (Item)dataGrid.SelectedItem;
+			if (item != null)
+			{
+				if (MessageBox.Show("Er du sikker på du vil slette denne kunde fra databasen?", "Slet kunde", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+				{
+					SQLSimplifier sql = new SQLSimplifier();
+					sql.Connect("ealdb1.eal.local", "EJL34_DB", "ejl34_usr", "Baz1nga34");
+					if(sql.Delete("AarskortMomentum", "ID", item.ID.ToString()) > 0)
+					{
+						MessageBox.Show("Kunden er nu slettet!");
+						UpdateDataGrid(null, null);
+					}
+				}
+			}
 		}
 
 		void UpdateDataGrid(object sender, RoutedEventArgs e)
 		{
-			//SQLSimplifier sql = new SQLSimplifier();
-			//sql.Connect("ealdb1.eal.local", "EJL34_DB", "ejl34_usr", "Baz1nga34");
-
-			//dataGrid.Items.Clear();
-			//dataGrid.Columns.Clear();
 			dataGrid.Items.Clear();
 			dataGrid.Items.Refresh();
-			
 
+			SqlConnection sql = new SqlConnection("Data Source=ealdb1.eal.local;Initial Catalog=EJL34_DB;User ID=ejl34_usr;Password=Baz1nga34");
+			try
+			{
+				sql.Open();
+				sql.Close();
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("Der skete en fejl.");
+			}
+			sql.Open();
+			string query = "SELECT ID, Fornavn, Efternavn, Mail, Adresse, Postnr, Tlf, IndloestDato, UdloebsDato, AarskortType, Andet, city FROM AarskortMomentum";
+			SqlCommand cmd;
+			if (search != "" && search != "Søg efter navn/tlf/email")
+			{
+				List<char> nums = new List<char>() { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+				if (search.Contains('@')) // E-mail
+				{
+					query += " WHERE Mail LIKE @mail";
+					cmd = new SqlCommand(query, sql);
+					cmd.Parameters.AddWithValue("mail", "%"+search+"%");
+				}
+				else if (nums.Any(s => search.Contains(s))) // Tlf nr.
+				{
+					query += " WHERE Tlf LIKE @tlf";
+					cmd = new SqlCommand(query, sql);
+					cmd.Parameters.AddWithValue("tlf", "%"+soegBox.Text+"%");
+				}
+				else // Navn
+				{
+					query += " WHERE Fornavn LIKE @fornavn OR Efternavn LIKE @efternavn";
+					cmd = new SqlCommand(query, sql);
+					cmd.Parameters.AddWithValue("fornavn", "%"+soegBox.Text+"%");
+					cmd.Parameters.AddWithValue("efternavn", "%"+soegBox.Text+"%");
+				}
+			}else
+			{
+				cmd = new SqlCommand(query, sql);
+			}
+			SqlDataReader reader = cmd.ExecuteReader();
+			if (reader.HasRows)
+			{
+				int rows = 0;
+				while (reader.Read())
+				{
+					rows++;
+					dataGrid.Items.Add(new Item() { ID = Convert.ToInt32(reader["ID"]), Fornavn = reader["Fornavn"].ToString(), Efternavn = reader["Efternavn"].ToString(), Adresse = reader["Adresse"].ToString(), Postnr = reader["Postnr"].ToString()
+						, City = reader["city"].ToString(), Email = reader["Mail"].ToString(), IndloestDato = Convert.ToDateTime(reader["IndloestDato"]), UdloebsDato = Convert.ToDateTime(reader["UdloebsDato"]), AarskortType = reader["AarskortType"].ToString()
+						, Tlf = reader["Tlf"].ToString(), Kommentar = reader["Andet"].ToString()});
+				}
+				soegresultat.Content = rows + " resultater fundet";
+			}
+		}
 
-			dataGrid.Items.Add(new Item() { ID = "1", Fornavn = "Lars", Efternavn = "Larsen", Email = "LarsLarsen@LL.dk", Tlf = "12457889" });
-			dataGrid.Items.Add(new Item() { ID = "2", Fornavn = "Hans", Efternavn = "Hansen", Email = "HansHansen@HH.dk", Tlf = "45986578" });
-			dataGrid.Items.Add(new Item() { ID = "3", Fornavn = "Simon", Efternavn = "Simonsen", Email = "SimonSimonsen@SS.dk", Tlf = "12548723" });
-			dataGrid.Items.Add(new Item() { ID = "4", Fornavn = "Ole", Efternavn = "Olsen", Email = "OleOlsen@OO.dk", Tlf = "56874457" });
+		private void KopierMail(object sender, RoutedEventArgs e)
+		{
+
+		}
+		private void KopierMailAlle(object sender, RoutedEventArgs e)
+		{
 
 		}
 
+		private void UpdateDataGridUdloeb(object sender, RoutedEventArgs e)
+		{
+			dataGridUdloeb.Items.Clear();
+			dataGridUdloeb.Items.Refresh();
+
+			SqlConnection sql = new SqlConnection("Data Source=ealdb1.eal.local;Initial Catalog=EJL34_DB;User ID=ejl34_usr;Password=Baz1nga34");
+			try
+			{
+				sql.Open();
+				sql.Close();
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("Der skete en fejl.");
+			}
+			sql.Open();
+			string query = "SELECT ID, UdloebsDato FROM AarskortMomentum";
+			SqlCommand cmd = new SqlCommand(query, sql);
+			SqlDataReader reader = cmd.ExecuteReader();
+			if (reader.HasRows)
+			{
+				while (reader.Read())
+				{
+					dataGridUdloeb.Items.Add(new UdloebItem() { ID = Convert.ToInt32(reader["ID"]), UdloebsDato = Convert.ToDateTime(reader["UdloebsDato"])});
+				}
+			}
+		}
+
+		private void dataGridUdloeb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			UdloebItem item = (UdloebItem)dataGridUdloeb.SelectedItem;
+			if (item != null)
+			{
+				KopierMailButton.IsEnabled = true;
+				KopierAlleMailButton.IsEnabled = true;
+			}
+		}
 	}
 	public class Item
 	{
-		public string ID { get; set; }
+		public int ID { get; set; }
 		public string Fornavn { get; set; }
 		public string Efternavn { get; set; }
-		public string Foedselsdato { get; set; }
+
+		public string Adresse { get; set; }
+		public string Postnr { get; set; }
+		public string City { get; set; }
 		public string Email { get; set; }
+		public DateTime IndloestDato { get; set; }
+		public DateTime UdloebsDato { get; set; }
+		public string AarskortType { get; set; }
 		public string Tlf { get; set; }
+		public string Kommentar { get; set; }
+	}
+	public class UdloebItem
+	{
+		public int ID { get; set; }
+		public DateTime UdloebsDato { get; set; }
 	}
 }

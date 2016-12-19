@@ -35,7 +35,7 @@ namespace Momentum_2._0
 			//MessageBox.Show("Brugernavn: "+textBox.Text+"\nAdgangskode: "+passwordBox.Password);
 			string brugernavn = textBox.Text;
 			string adgangskode = passwordBox.Password;
-			/*
+			
 			SqlConnection sql = new SqlConnection("Data Source=ealdb1.eal.local;Initial Catalog=EJL34_DB;User ID=ejl34_usr;Password=Baz1nga34");
 			try
 			{
@@ -58,11 +58,11 @@ namespace Momentum_2._0
 				if(brugernavn == (string)reader["Brugernavn"] && adgangskode == (string)reader["Adgangskode"])
 				{
 					sql.Close();
-					sql.Dispose();*/
+					sql.Dispose();
 					MainMenu win = new MainMenu();
 					win.Username(textBox.Text);
 					win.Show();
-					this.Close();/*
+					this.Close();
 					return;
 				}
 			}
@@ -72,7 +72,7 @@ namespace Momentum_2._0
 				sql.Close();
 				sql.Dispose();
 			}
-			*/
+			
 		}
 	}
 }

@@ -31,34 +31,31 @@
 		<Grid.Background>
 			<ImageBrush ImageSource="/images/momentum_bg.png" Stretch="UniformToFill"/>
 		</Grid.Background>
-		<StackPanel HorizontalAlignment="Center" Height="450" Margin="0,0,220,100" VerticalAlignment="Center" Width="170" Background="Black" Opacity="0.85">
-			<Label x:Name="label" Content="Label" Foreground="White" Margin="20,10,0,0"/>
-			<Label x:Name="label_Copy" Content="Label" Foreground="White" Margin="20,10,0,0"/>
-			<Label x:Name="label_Copy1" Content="Label" Foreground="White" Margin="20,10,0,0"/>
-			<Label x:Name="label_Copy2" Content="Label" Foreground="White" Margin="20,10,0,0"/>
-			<Label x:Name="label_Copy3" Content="Label" Foreground="White" Margin="20,10,0,0"/>
-			<Label x:Name="label_Copy4" Content="Label" Foreground="White" Margin="20,10,0,0"/>
-			<Label x:Name="label_Copy5" Content="Label" Foreground="White" Margin="20,10,0,0"/>
-			<Label x:Name="label_Copy6" Content="Label" Foreground="White" Margin="20,10,0,0"/>
-			<Label x:Name="label_Copy7" Content="Label" Foreground="White" Margin="20,10,0,0"/>
-			<Label x:Name="label_Copy8" Content="Label" Foreground="White" Margin="20,10,0,0"/>
-			<Label x:Name="label_Copy9" Content="Label" Foreground="White" Margin="20,10,0,0"/>
+		<StackPanel HorizontalAlignment="Center" Height="450" Margin="0,0,270,100" VerticalAlignment="Center" Width="120" Background="Black" Opacity="0.85">
+			<Label x:Name="label" Content="Fornavn" Foreground="White" Margin="20,14,0,0"/>
+			<Label x:Name="label_Copy" Content="Efternavn" Foreground="White" Margin="20,14,0,0"/>
+			<Label x:Name="label_Copy1" Content="Adresse" Foreground="White" Margin="20,14,0,0"/>
+			<Label x:Name="label_Copy2" Content="Post Nr." Foreground="White" Margin="20,14,0,0"/>
+			<Label x:Name="label_Copy3" Content="By" Foreground="White" Margin="20,14,0,0"/>
+			<Label x:Name="label_Copy4" Content="Email" Foreground="White" Margin="20,14,0,0"/>
+			<Label x:Name="label_Copy5" Content="Udløbsdato" Foreground="White" Margin="20,14,0,0"/>
+			<Label x:Name="label_Copy6" Content="Korttype" Foreground="White" Margin="20,14,0,0"/>
+			<Label x:Name="label_Copy7" Content="Tlf Nr." Foreground="White" Margin="20,14,0,0"/>
+			<Label x:Name="label_Copy8" Content="Kommentar" Foreground="White" Margin="20,14,0,0"/>
 		</StackPanel>
-		<StackPanel HorizontalAlignment="Center" Height="450" Margin="170,0,0,100" VerticalAlignment="Center" Width="220" Background="Black" Opacity="0.85">
-			<TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
-			<TextBox x:Name="textBox_Copy" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
-			<TextBox x:Name="textBox_Copy1" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
-			<TextBox x:Name="textBox_Copy2" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
-			<TextBox x:Name="textBox_Copy3" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
-			<TextBox x:Name="textBox_Copy4" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
-			<TextBox x:Name="textBox_Copy5" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
-			<TextBox x:Name="textBox_Copy6" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
-			<TextBox x:Name="textBox_Copy7" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
-			<TextBox x:Name="textBox_Copy8" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
-			<TextBox x:Name="textBox_Copy9" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
-			<TextBox x:Name="textBox_Copy10" Height="23" TextWrapping="Wrap" Text="TextBox" Margin="0,10,0,0" Width="180"/>
+		<StackPanel HorizontalAlignment="Center" Height="450" Margin="120,0,0,100" VerticalAlignment="Center" Width="270" Background="Black" Opacity="0.85">
+			<TextBox x:Name="fornavn" Height="26" TextWrapping="Wrap" Margin="0,14,0,0" Width="230" TabIndex="1" VerticalContentAlignment="Center" MaxLength="50"/>
+			<TextBox x:Name="efternavn" Height="26" TextWrapping="Wrap" Margin="0,14,0,0" Width="230" TabIndex="2" VerticalContentAlignment="Center" MaxLength="50"/>
+			<TextBox x:Name="adresse" Height="26" TextWrapping="Wrap" Margin="0,14,0,0" Width="230" TabIndex="3" VerticalContentAlignment="Center" MaxLength="50"/>
+			<TextBox x:Name="postnr" Height="26" TextWrapping="Wrap" Margin="0,14,0,0" Width="230" TabIndex="4" VerticalContentAlignment="Center" MaxLength="50"/>
+			<TextBox x:Name="by" Height="26" TextWrapping="Wrap" Margin="0,14,0,0" Width="230" TabIndex="5" VerticalContentAlignment="Center" MaxLength="50"/>
+			<TextBox x:Name="email" Height="26" TextWrapping="Wrap" Margin="0,14,0,0" Width="230" TabIndex="6" VerticalContentAlignment="Center" MaxLength="50"/>
+			<DatePicker x:Name="udloebsdato" TabIndex="7" Width="230" Height="26" Margin="0,14,0,0" VerticalContentAlignment="Center" Background="White" FirstDayOfWeek="Monday" IsTodayHighlighted="True" SelectedDateFormat="Short"/>
+			<TextBox x:Name="korttype" Height="26" TextWrapping="Wrap" Margin="0,14,0,0" Width="230" TabIndex="8" VerticalContentAlignment="Center" MaxLength="50"/>
+			<TextBox x:Name="tlf" Height="26" TextWrapping="Wrap" Margin="0,14,0,0" Width="230" TabIndex="9" VerticalContentAlignment="Center" MaxLength="50"/>
+			<TextBox x:Name="kommentar" Height="60" TextWrapping="Wrap" Margin="20,14,20,0" Width="230" TabIndex="10" AcceptsReturn="True" MaxLines="3" MaxLength="100"/>
 		</StackPanel>
-		<Button x:Name="OKButton" Template="{StaticResource RoundedButtonTemplate}" Background="#FF1E64DC" Foreground="White" Content="OK" Margin="80,0,0,50" Width="120" Height="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand"/>
-		<Button x:Name="CancelButton" Template="{StaticResource RoundedButtonTemplate}" Background="#FF1E64DC" Foreground="White" Content="Annuller" HorizontalAlignment="Right" Margin="0,0,80,50" VerticalAlignment="Bottom" Width="120" Height="60" Cursor="Hand"/>
+		<Button x:Name="OKButton" Template="{StaticResource RoundedButtonTemplate}" Background="#FF1E64DC" Foreground="White" Content="OK" Margin="80,0,0,50" Width="120" Height="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand" TabIndex="11" Click="OKButton_Click"/>
+		<Button x:Name="CancelButton" Template="{StaticResource RoundedButtonTemplate}" Background="#FF1E64DC" Foreground="White" Content="Annuller" HorizontalAlignment="Right" Margin="0,0,80,50" VerticalAlignment="Bottom" Width="120" Height="60" Cursor="Hand" TabIndex="12" Click="CancelButton_Click"/>
 	</Grid>
 </Window>

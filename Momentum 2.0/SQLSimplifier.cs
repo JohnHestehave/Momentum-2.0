@@ -134,8 +134,8 @@ namespace Momentum_2._0
 
 		public int Delete(string table, string row, string value)
 		{
-			SqlCommand cmd = new SqlCommand("DELETE FROM " + table + " WHERE " + row + "=" + value, sql);
-			cmd.Parameters.AddWithValue("value", value);
+			SqlCommand cmd = new SqlCommand("DELETE FROM " + table + " WHERE " + row + "=@" + row, sql);
+			cmd.Parameters.AddWithValue(row, value);
 			sql.Open();
 			int i = cmd.ExecuteNonQuery();
 			sql.Close();
